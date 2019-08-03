@@ -12,8 +12,21 @@ Date: <18/04/1998>
 # import Relevant Librares
 import RPi.GPIO as GPIO
 import time
+from itertools import product
 
 # Logic that you write
+i = 0
+a = [[0,1],[0,1],[0,1]]
+b = list(product(*a))
+
+def increment(channel):
+	global i
+	i+=1
+	if i == 8:
+		i = 0
+	GPIO.output(17, b[i][0])
+	GPIO.output(22, b[i][1])
+	GPIO.output(27, b[i][2])
 
 def main():
 	time.sleep(.001)
@@ -43,4 +56,4 @@ if __name__ == "__main__":
     except:
       	GPIO.cleanup()
        	print("Some other error occurred")
-        print(e.message)
+        
